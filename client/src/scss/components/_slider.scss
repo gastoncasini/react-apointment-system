@@ -1,0 +1,14 @@
+.slider {
+  max-width: 800px;
+  width: 80%;
+  margin: 30px auto;
+
+  @at-root #{&}__controls {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  @at-root #{&}__arrow {
+    cursor: pointer;
+  }
+}

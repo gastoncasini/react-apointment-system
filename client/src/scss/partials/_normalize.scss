@@ -1,0 +1,45 @@
+/* normalize */
+
+html,
+body,
+p,
+h3,
+h2,
+h1,
+ul {
+  margin: 0;
+}
+
+h3,
+h2,
+h1 {
+  font-weight: 400;
+}
+button {
+  margin: 0;
+  outline: none;
+  border: none;
+}
+input,
+select {
+  border: none;
+  outline: none;
+}
+
+button,
+ul,
+label {
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+}
+hr {
+  width: 87%;
+  margin: 0 auto;
+}

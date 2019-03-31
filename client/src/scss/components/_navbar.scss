@@ -1,0 +1,35 @@
+.navbar {
+  position: relative;
+  background-color: $primary-color;
+  color: $text-color;
+  height: 67px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  @at-root #{&}__item {
+    box-sizing: border-box;
+    padding: 16px;
+    @at-root #{&}--center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  @at-root #{&}__link {
+    display: block;
+    @at-root #{&}:visited {
+      color: $text-color;
+    }
+  }
+
+  @at-root #{&}__login {
+    cursor: pointer;
+  }
+
+  @at-root #{&}__brand {
+    font-size: 24px;
+    font-weight: bold;
+    margin: auto;
+  }
+}

@@ -1,0 +1,11 @@
+@import './partials/normalize';
+@import './partials/variables';
+
+html,
+body {
+  font-family: sans-serif;
+}
+
+@import './components/navbar';
+@import './components/slider';
+@import './components/table';
