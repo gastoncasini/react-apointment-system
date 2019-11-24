@@ -1,0 +1,139 @@
+/* normalize */
+html,
+body,
+p,
+h3,
+h2,
+h1,
+ul {
+  margin: 0;
+}
+
+h3,
+h2,
+h1 {
+  font-weight: 400;
+}
+
+button {
+  margin: 0;
+  outline: none;
+  border: none;
+}
+
+input,
+select {
+  border: none;
+  outline: none;
+}
+
+button,
+ul,
+label {
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+hr {
+  width: 87%;
+  margin: 0 auto;
+}
+
+html,
+body {
+  font-family: sans-serif;
+}
+
+.navbar {
+  position: relative;
+  background-color: #00bcc2;
+  color: #ebebeb;
+  height: 67px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.navbar__item {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 16px;
+}
+
+.navbar__item--center {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+
+.navbar__link {
+  display: block;
+}
+
+.navbar__link:visited {
+  color: #ebebeb;
+}
+
+.navbar__login {
+  cursor: pointer;
+}
+
+.navbar__brand {
+  font-size: 24px;
+  font-weight: bold;
+  margin: auto;
+}
+
+.slider {
+  max-width: 800px;
+  width: 80%;
+  margin: 30px auto;
+}
+
+.slider__controls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.slider__arrow {
+  cursor: pointer;
+}
+
+.table {
+  margin: 40px 0;
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+.table__row {
+  border-bottom: 2px solid #00bcc2;
+}
+
+.table__cell {
+  cursor: pointer;
+  padding: 1.3rem;
+}
+
+.table__cell--taken {
+  background-color: #00d5dc;
+  color: #ebebeb;
+}
+/*# sourceMappingURL=app.css.map */
