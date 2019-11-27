@@ -6,7 +6,7 @@ import uuid from 'uuid';
 class Table extends Component {
   state = {
     headings: ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
-    rows: this.arrayOfObjs(6, 6, [
+    cols: this.arrayOfObjs(6, 6, [
       '9:00',
       '10:00',
       '11:00',
@@ -72,7 +72,7 @@ class Table extends Component {
     this.arrayOfObjs(6, 6, [9, 10, 11, 12, 13, 14]);
     return (
       <table className='table'>
-        {this.renderTable(this.state.headings, this.state.rows)}
+        {this.renderTable(this.state.headings, this.state.cols)}
       </table>
     );
   }
