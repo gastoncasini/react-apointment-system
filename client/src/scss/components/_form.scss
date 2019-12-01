@@ -1,0 +1,26 @@
+.form {
+  display: flex;
+  justify-content: center;
+}
+
+.form_block {
+  border: none;
+}
+
+// react calendar custom styles
+
+.react-calendar__tile--active {
+  background: $secondary-color;
+}
+.react-calendar__tile--active:enabled:focus {
+  background: $secondary-color;
+}
+.react-calendar__tile--active:enabled:hover {
+  background-color: $secondary-color;
+}
+.react-calendar__month-view__days__day--weekend {
+  color: #757575;
+  @at-root #{&}:hover {
+    /*  background-color: $primary-color !important; */
+  }
+}
