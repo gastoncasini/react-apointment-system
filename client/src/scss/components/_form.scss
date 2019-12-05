@@ -1,14 +1,24 @@
 .form {
-  display: flex;
-  justify-content: center;
-}
+  max-width: 80%;
+  margin: 20px auto auto;
 
-.form_block {
-  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+
+  @at-root #{&}__block {
+    height: 50vw;
+  }
 }
 
 // react calendar custom styles
 
+.react-calendar {
+  border: none;
+}
 .react-calendar__tile--active {
   background: $secondary-color;
 }
@@ -20,7 +30,36 @@
 }
 .react-calendar__month-view__days__day--weekend {
   color: #757575;
-  @at-root #{&}:hover {
-    /*  background-color: $primary-color !important; */
+}
+
+// time picker
+
+.time-picker {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 350px;
+
+  @at-root #{&}__tile {
+    width: 33.3%;
+    font-size: 24px;
+    padding: 6px;
+    border: transparent solid;
+    border-radius: 10px;
+
+    @at-root #{&}:focus {
+      background-color: $primary-color;
+      @at-root #{&}:hover {
+        background-color: $primary-color;
+      }
+    }
+
+    @at-root #{&}:hover {
+      background-color: $tertiary-color;
+    }
+
+    @at-root #{&}--taken {
+      background: black;
+    }
   }
 }
