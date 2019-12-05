@@ -1,26 +1,20 @@
 import React, { Component } from 'react';
+import FormBlock from './FormBlock';
 import Calendar from 'react-calendar';
 import TimePicker from './TimePicker';
 
-class FormsBlock extends Component {
+class Form extends Component {
   render() {
     return (
       <form className='form'>
-        <div className='form__block'>
+        {/*     <div className='form__block'>
           <p className='form__block__para'>
             Elegi un dia disponible para tu reserva
           </p>
-          <Calendar
-            onClickDay={day => {
-              const dayObj = {
-                value: formatDay(day.toDateString()),
-                position: 0,
-              };
-              this.props.handleClick(dayObj);
-            }}
-          />
-        </div>
-        <div className='form__block'>
+          
+        </div> */}
+
+        {/* <div className='form__block'>
           <TimePicker
             onClickTime={time => {
               const timeObj = {
@@ -30,12 +24,25 @@ class FormsBlock extends Component {
               this.props.handleClick(timeObj);
             }}
           />
-        </div>
+        </div> */}
+
+        <FormBlock
+          number={1}
+          info={'Elegi un dia disponible para tu reserva'}
+        ></FormBlock>
+        <FormBlock
+          number={2}
+          info={'Elegi un horario disponible para tu reserva'}
+        ></FormBlock>
+        <FormBlock
+          number={3}
+          info={'Por favor completa con tu infomracion de concacto'}
+        ></FormBlock>
       </form>
     );
   }
 }
-export default FormsBlock;
+export default Form;
 
 const formatDay = string => {
   let weekday = string.slice(0, 3);

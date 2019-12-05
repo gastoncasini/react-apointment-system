@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Display from './Display';
-import FormsBlock from './FormsBlock';
+import Form from './Form';
 import '../css/app.css';
 
 class App extends Component {
@@ -32,7 +32,7 @@ class App extends Component {
       <div className='App'>
         <Display info={this.state.currentInfo} />
 
-        <FormsBlock handleClick={this.handleClick} />
+        <Form handleClick={this.handleClick} />
       </div>
     );
   }
