@@ -10,18 +10,28 @@ export class FormBlock extends Component {
   }
 
   render() {
-    const { active } = this.state;
+    const open = this.props.toggle === this.props.number ? true : false;
     return (
-      <div className='form__block'>
-        <button className='form__block__button' type={'button'}>
-          <span className={`form__block__number${active ? '--active' : ''}`}>
+      <div className={`form__block ${open ? 'form__block--open' : ''}`}>
+        <button
+          className='form__block__button'
+          type={'button'}
+          onClick={() => {
+            this.props.onClick(this.props.number);
+          }}
+        >
+          <span
+            className={`form__block__number${
+              open ? ' form__block__number--active' : ''
+            }`}
+          >
             {this.props.number}
           </span>
 
           {this.props.info}
         </button>
 
-        {this.props.children}
+        {open && this.props.children}
       </div>
     );
   }

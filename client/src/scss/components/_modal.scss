@@ -1,0 +1,20 @@
+.modal {
+  position: absolute;
+  top: 0;
+  height: 100vw;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.205);
+  @at-root #{&}__content {
+    position: relative;
+    background-color: white;
+    display: flex;
+    top: 10%;
+    width: 500px;
+    margin: 0 auto;
+  }
+
+  @at-root #{&}__display {
+    width: 150px;
+    background: $primary-color;
+  }
+}
