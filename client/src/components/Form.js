@@ -10,6 +10,8 @@ class Form extends Component {
 
     this.state = {
       open: 1,
+      isModalOpen: false,
+      inputValue: '',
     };
 
     this.clickHandler = this.clickHandler.bind(this);
@@ -33,8 +35,10 @@ class Form extends Component {
       value: formatDay(date),
       position: 0,
     };
-
     this.props.handleClick(displayDate);
+
+    const inputDate = formatDay(date, 'input');
+    this.setState({ value: inputDate });
   }
 
   render() {
@@ -51,6 +55,7 @@ class Form extends Component {
             <div className='form__block__element'>
               <input
                 placeholder='Seleciona un dia'
+                value={this.state.value}
                 type='text'
                 className='form__block__input'
                 onClick={this.toggleModal}

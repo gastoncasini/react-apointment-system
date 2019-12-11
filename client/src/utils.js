@@ -4,7 +4,7 @@ export const formatDay = (DateObj, format) => {
   let weekday = stringDate.slice(0, 3);
   let writtenMonth = stringDate.slice(4, 7);
   const day = stringDate.slice(8, 10);
-  const month = DateObj.getMonth();
+  const month = DateObj.getMonth() + 1;
   const year = stringDate.slice(11, 15);
 
   if (format === 'array') {
