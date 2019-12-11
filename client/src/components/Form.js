@@ -52,15 +52,14 @@ class Form extends Component {
             number={1}
             info={'Elegi un dia disponible para tu reserva'}
           >
-            <div className='form__block__element'>
-              <input
-                placeholder='Seleciona un dia'
-                value={this.state.value}
-                type='text'
-                className='form__block__input'
-                onClick={this.toggleModal}
-              />
-            </div>
+            <input
+              placeholder='Seleciona un dia'
+              value={this.state.value}
+              type='text'
+              className='form__block__input'
+              onClick={this.toggleModal}
+            />
+
             {isModalOpen && (
               <Modal toggleModal={this.toggleModal} setDate={this.setDate} />
             )}
@@ -71,7 +70,9 @@ class Form extends Component {
             toggle={this.state.open}
             number={2}
             info={'Elegi un horario disponible para tu reserva'}
-          ></FormBlock>
+          >
+            <TimePicker />
+          </FormBlock>
 
           <FormBlock
             onClick={this.clickHandler}

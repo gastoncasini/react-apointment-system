@@ -30,8 +30,9 @@ export class FormBlock extends Component {
 
           {this.props.info}
         </button>
-
-        {open && this.props.children}
+        <div className='form__block__element'>
+          {open && this.props.children}
+        </div>
       </div>
     );
   }
