@@ -1,7 +1,11 @@
 .modal {
+  overflow: hidden;
   position: absolute;
+  z-index: 99;
   top: 0;
-  height: 100vw;
+  left: 0;
+  right: 0;
+  height: 100%;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.205);
   @at-root #{&}__content {
@@ -15,6 +19,46 @@
 
   @at-root #{&}__display {
     width: 150px;
+    padding: 15px;
     background: $primary-color;
+    color: #fff;
+    @at-root #{&}__small {
+      height: 16px;
+      opacity: 0.7;
+      margin-bottom: 20px;
+    }
+
+    @at-root #{&}__big {
+      font-size: 32px;
+    }
   }
+
+  @at-root #{&}__controls {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    @at-root #{&}__button {
+      box-sizing: border-box;
+      color: $primary-color;
+      cursor: pointer;
+      width: 80px;
+      padding: 10px;
+      margin: 10px;
+      border-radius: 5px;
+
+      @at-root #{&}:hover {
+        background: $tertiary-color;
+      }
+      @at-root #{&}:focus {
+        background: $tertiary-color;
+      }
+    }
+  }
+}
+
+.react-calendar__tile--active:enabled:focus {
+  background: $secondary-color;
+}
+.react-calendar__tile--active:enabled:hover {
+  background-color: $secondary-color;
 }

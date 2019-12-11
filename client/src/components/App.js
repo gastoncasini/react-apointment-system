@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Display from './Display';
 import Form from './Form';
 import '../css/app.css';
+import { replaceArrayElement } from '../utils.js';
 
 class App extends Component {
   constructor() {
@@ -17,13 +18,7 @@ class App extends Component {
 
   handleClick(obj) {
     const currentState = this.state.currentInfo;
-    const updated = currentState.map((value, index) => {
-      if (index === obj.position) {
-        return obj.value;
-      }
-      return value;
-    });
-
+    const updated = replaceArrayElement(currentState, obj);
     this.setState({ currentInfo: updated });
   }
 

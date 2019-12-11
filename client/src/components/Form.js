@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import FormBlock from './FormBlock';
-import Calendar from 'react-calendar';
 import TimePicker from './TimePicker';
 import Modal from './Modal';
+import { formatDay } from '../utils.js';
 
 class Form extends Component {
   constructor(props) {
@@ -10,11 +10,11 @@ class Form extends Component {
 
     this.state = {
       open: 1,
-      isModalOpen: false,
     };
 
     this.clickHandler = this.clickHandler.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
+    this.setDate = this.setDate.bind(this);
   }
 
   clickHandler(value) {
@@ -22,32 +22,26 @@ class Form extends Component {
   }
 
   toggleModal() {
-    console.log('toggled!');
+    const change = !this.state.isModalOpen;
+    this.setState({
+      isModalOpen: change,
+    });
+  }
+
+  setDate(date) {
+    const displayDate = {
+      value: formatDay(date),
+      position: 0,
+    };
+
+    this.props.handleClick(displayDate);
   }
 
   render() {
+    const { isModalOpen } = this.state;
     return (
       <React.Fragment>
         <form className='form'>
-          {/*     <div className='form__block'>
-          <p className='form__block__para'>
-            Elegi un dia disponible para tu reserva
-          </p>
-          
-        </div> */}
-
-          {/* <div className='form__block'>
-          <TimePicker
-            onClickTime={time => {
-              const timeObj = {
-                value: `${time} Hs`,
-                position: 1,
-              };
-              this.props.handleClick(timeObj);
-            }}
-          />
-        </div> */}
-
           <FormBlock
             onClick={this.clickHandler}
             toggle={this.state.open}
@@ -56,11 +50,15 @@ class Form extends Component {
           >
             <div className='form__block__element'>
               <input
+                placeholder='Seleciona un dia'
                 type='text'
                 className='form__block__input'
                 onClick={this.toggleModal}
               />
             </div>
+            {isModalOpen && (
+              <Modal toggleModal={this.toggleModal} setDate={this.setDate} />
+            )}
           </FormBlock>
 
           <FormBlock
@@ -74,10 +72,9 @@ class Form extends Component {
             onClick={this.clickHandler}
             toggle={this.state.open}
             number={3}
-            info={'Por favor completa con tu infomracion de concacto'}
+            info={'Por favor completa con tu infomacion de concacto'}
           ></FormBlock>
         </form>
-        <Modal />
       </React.Fragment>
     );
   }
