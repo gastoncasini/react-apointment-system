@@ -94,3 +94,13 @@ export const replaceArrayElement = (array, obj) => {
 
   return updatedArray;
 };
+
+export const fillSchedule = (start, end) => {
+  let schedule = [];
+  for (let i = start; i <= end + 1; i++) {
+    const current = i < 10 ? `0${i}:00` : `${i}:00`;
+
+    schedule.push(current);
+  }
+  return schedule;
+};

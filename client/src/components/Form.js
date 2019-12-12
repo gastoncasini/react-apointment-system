@@ -17,6 +17,7 @@ class Form extends Component {
     this.clickHandler = this.clickHandler.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.setDate = this.setDate.bind(this);
+    this.setTime = this.setTime.bind(this);
   }
 
   clickHandler(value) {
@@ -39,6 +40,14 @@ class Form extends Component {
 
     const inputDate = formatDay(date, 'input');
     this.setState({ value: inputDate });
+  }
+
+  setTime(time) {
+    const displayTime = {
+      value: time,
+      position: 1,
+    };
+    this.props.handleClick(displayTime);
   }
 
   render() {
@@ -71,7 +80,7 @@ class Form extends Component {
             number={2}
             info={'Elegi un horario disponible para tu reserva'}
           >
-            <TimePicker />
+            <TimePicker setTime={this.setTime} />
           </FormBlock>
 
           <FormBlock
