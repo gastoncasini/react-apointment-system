@@ -1,7 +1,7 @@
 .form {
   max-width: 80%;
   min-height: 350px;
-  max-height: 400px;
+
   margin: 20px auto auto;
 
   display: flex;
@@ -60,11 +60,15 @@
 
     // form html tags
     @at-root #{&}__element {
-      margin: 15px 0 15px 80px;
+      margin: 0 0 15px 80px;
+      width: 100%;
+      max-width: 256px;
     }
 
     @at-root #{&}__input {
-      border-bottom: 1px solid rgb(36, 35, 35);
+      width: 100%;
+      font-size: 18px;
+      border-bottom: 1px solid $details;
       cursor: pointer;
     }
   }
@@ -90,32 +94,70 @@
 
 // time picker
 
-.time-picker {
+.timepicker {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  width: 350px;
+  flex-flow: column nowrap;
+  @at-root #{&}__dropdown {
+    display: flex;
+    flex-flow: column nowrap;
+    margin-bottom: 16px;
+    @at-root #{&}__title {
+      font-size: 14px;
+      color: $details;
+    }
 
-  @at-root #{&}__tile {
-    width: 33.3%;
-    font-size: 24px;
-    padding: 6px;
-    border: transparent solid;
-    border-radius: 10px;
+    @at-root #{&}__select {
+      border-bottom: 1px solid $details;
+    }
+  }
 
-    @at-root #{&}:focus {
-      background-color: $primary-color;
-      @at-root #{&}:hover {
+  @at-root #{&}__radio-group {
+    display: flex;
+    flex-flow: column nowrap;
+  }
+
+  @at-root #{&}__radio-container {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    margin: 10px 0 10px 0;
+  }
+  @at-root #{&}__radio {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  @at-root #{&}__custom-radio {
+    margin-right: 5px;
+    display: inline-block;
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+
+    border: 2px solid $details;
+
+    @at-root #{&}::after {
+      content: '';
+      position: absolute;
+      top: 2.5px;
+      left: 2.5px;
+      height: 15px;
+      width: 15px;
+      border-radius: 50%;
+      background-color: $details;
+    }
+
+    @at-root #{&}--checked {
+      border: 2px solid $primary-color;
+      @at-root #{&}::after {
         background-color: $primary-color;
       }
-    }
-
-    @at-root #{&}:hover {
-      background-color: $tertiary-color;
-    }
-
-    @at-root #{&}--taken {
-      background: black;
     }
   }
 }
