@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FormBlock from './FormBlock';
 import TimePicker from './TimePicker';
+import ContatInfo from './ContacInfo';
 import Modal from './Modal';
 import { formatDay } from '../utils.js';
 
@@ -88,7 +89,9 @@ class Form extends Component {
             toggle={this.state.open}
             number={3}
             info={'Por favor completa con tu infomacion de concacto'}
-          ></FormBlock>
+          >
+            <ContatInfo />
+          </FormBlock>
         </form>
       </React.Fragment>
     );
