@@ -9,18 +9,36 @@ class ContacInfo extends Component {
       apellido: '',
       telefono: '',
       mail: '',
+      isActive: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.activeInputs = this.activeInputs.bind(this);
   }
+
+  activeInputs = clickEvent => {
+    this.setState({ isActive: clickEvent.target.name });
+  };
 
   handleChange = changeEvent => {
     const value = changeEvent.target.value;
     const name = changeEvent.target.name;
 
     this.setState({ [name]: value });
+  };
 
-    console.log('cagamos', name);
+  addClasses = (bemSelector, name) => {
+    let classes = bemSelector;
+    let isActive = this.state.isActive === name;
+    let isFilled = this.state[name] !== '';
+    if (isActive) {
+      classes += ` ${bemSelector}--active`;
+    }
+    if (isFilled) {
+      classes += ` ${bemSelector}--filled`;
+    }
+
+    return classes;
   };
 
   render() {
@@ -29,17 +47,30 @@ class ContacInfo extends Component {
         <legend>Completa tu infomacion de contacto</legend>
         {['nombre', 'apellido', 'mail', 'telefono'].map((name, index) => {
           const value = this.state[name];
+          const classes = [
+            'contact-info__label',
+            'contact-info__input__placeholder',
+            'contact-info__input__border',
+          ].map(bem => {
+            return this.addClasses(bem, name);
+          });
+          console.log(classes, this.state);
+
           return (
-            <label htmlFor='' className='contact-info__element' key={index}>
+            <div className='contact-info__element' key={index}>
+              <label className={classes[0]}>{name}</label>
+              <div className={classes[1]}>{name}</div>
               <input
                 autoComplete='off'
-                name={name}
                 type='text'
+                onClick={this.activeInputs}
                 onChange={this.handleChange}
                 value={value}
-                placeholder={name}
+                className={'contact-info__input'}
+                name={name}
               />
-            </label>
+              <hr className={classes[2]} />
+            </div>
           );
         })}
       </fieldset>

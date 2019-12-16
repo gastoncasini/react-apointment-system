@@ -161,3 +161,65 @@
     }
   }
 }
+
+.contact-info {
+  @at-root #{&}__element {
+    position: relative;
+    margin: 15px 0;
+    width: 100%;
+    max-width: 256px;
+    height: 72px;
+  }
+
+  @at-root #{&}__label {
+    position: absolute;
+    bottom: 25px;
+    z-index: 3;
+    color: $details;
+    font-size: 18px;
+    @at-root #{&}--filled {
+      bottom: 48px;
+      font-size: 15px;
+      color: $details;
+    }
+    @at-root #{&}--active {
+      bottom: 48px;
+      font-size: 15px;
+      color: $primary-color;
+    }
+  }
+
+  @at-root #{&}__input {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: transparent;
+    height: 100%;
+    width: 100%;
+    font-size: 18px;
+
+    cursor: text;
+
+    @at-root #{&}__border {
+      margin: 0px;
+      border: 1px solid $details;
+      position: absolute;
+      width: 100%;
+      bottom: 23px;
+      @at-root #{&}--active {
+        border-color: $primary-color;
+      }
+    }
+
+    @at-root #{&}__placeholder {
+      color: $details;
+      font-size: 18px;
+      position: absolute;
+      bottom: 25px;
+      @at-root #{&}--filled {
+        display: none;
+      }
+    }
+  }
+}
