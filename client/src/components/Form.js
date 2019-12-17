@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FormBlock from './FormBlock';
 import TimePicker from './TimePicker';
 import ContatInfo from './ContacInfo';
+import SubmitButton from './SubmitButton';
 import Modal from './Modal';
 import { formatDay } from '../utils.js';
 
@@ -13,15 +14,21 @@ class Form extends Component {
       open: 1,
       isModalOpen: false,
       inputValue: '',
+      enableSubmit: false,
     };
 
-    this.clickHandler = this.clickHandler.bind(this);
+    this.toggleBlocks = this.toggleBlocks.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.setDate = this.setDate.bind(this);
     this.setTime = this.setTime.bind(this);
+    this.inputValidator = this.inputValidator.bind(this);
   }
 
-  clickHandler(value) {
+  inputValidator(isValidated) {
+    this.setState({ enableSubmit: isValidated });
+  }
+
+  toggleBlocks(value) {
     this.setState({ open: value });
   }
 
@@ -40,7 +47,7 @@ class Form extends Component {
     this.props.handleClick(displayDate);
 
     const inputDate = formatDay(date, 'input');
-    this.setState({ value: inputDate });
+    this.setState({ inputValue: inputDate });
   }
 
   setTime(time) {
@@ -57,14 +64,14 @@ class Form extends Component {
       <React.Fragment>
         <form className='form'>
           <FormBlock
-            onClick={this.clickHandler}
+            onClick={this.toggleBlocks}
             toggle={this.state.open}
             number={1}
             info={'Elegi un dia disponible para tu reserva'}
           >
             <input
               placeholder='Seleciona un dia'
-              value={this.state.value}
+              value={this.state.inputValue}
               type='text'
               className='form__block__input'
               onClick={this.toggleModal}
@@ -76,7 +83,7 @@ class Form extends Component {
           </FormBlock>
 
           <FormBlock
-            onClick={this.clickHandler}
+            onClick={this.toggleBlocks}
             toggle={this.state.open}
             number={2}
             info={'Elegi un horario disponible para tu reserva'}
@@ -85,13 +92,18 @@ class Form extends Component {
           </FormBlock>
 
           <FormBlock
-            onClick={this.clickHandler}
+            onClick={this.toggleBlocks}
             toggle={this.state.open}
             number={3}
             info={'Por favor completa con tu infomacion de concacto'}
           >
-            <ContatInfo />
+            <ContatInfo inputValidation={this.inputValidator} />
           </FormBlock>
+          <SubmitButton
+            isEnabled={this.state.enableSubmit}
+            toggle={this.state.open}
+            number={3}
+          />
         </form>
       </React.Fragment>
     );
