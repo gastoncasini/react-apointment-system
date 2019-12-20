@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Calendar from "react-calendar";
 import Modal from "./Modal";
-import { formatDay, updateArray } from "../utils.js";
+import { formatDay } from "../utils.js";
 
 export class CalendarModal extends Component {
   constructor(props) {

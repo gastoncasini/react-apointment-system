@@ -2,10 +2,8 @@ import React, { Component } from "react";
 import FormBlock from "./FormBlock";
 import TimePicker from "./TimePicker";
 import ContatInfo from "./ContacInfo";
-
-import CalendarModal from "./CalendarModal";
-import { formatDay } from "../utils.js";
 import DatePicker from "./DatePicker";
+import SubmitModal from "./SubmitModal";
 
 class Form extends Component {
   constructor(props) {
@@ -15,7 +13,7 @@ class Form extends Component {
       open: 1,
       calendar: false,
       submit: false,
-      inputValue: "",
+
       submitInfo: {
         date: null,
         time: null,
@@ -75,7 +73,7 @@ class Form extends Component {
   }
 
   render() {
-    const { calendar } = this.state;
+    const { calendar, submit, submitInfo } = this.state;
     return (
       <React.Fragment>
         <form className="form">
@@ -109,8 +107,18 @@ class Form extends Component {
             info={"Por favor completa con tu infomacion de concacto"}
             rel={true}
           >
-            <ContatInfo setContactInfo={this.setContactInfo} />
+            <ContatInfo
+              setContactInfo={this.setContactInfo}
+              toggleModal={this.toggleModal}
+              toggleBlocks={this.toggleBlocks}
+            />
           </FormBlock>
+          {submit && (
+            <SubmitModal
+              submitInfo={submitInfo}
+              toggleModal={this.toggleModal}
+            />
+          )}
         </form>
       </React.Fragment>
     );

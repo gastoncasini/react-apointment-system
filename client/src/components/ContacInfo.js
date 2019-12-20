@@ -15,9 +15,10 @@ class ContacInfo extends Component {
     this.clickSubmit = this.clickSubmit.bind(this);
     this.clickInputs = this.clickInputs.bind(this);
     this.focusInputs = this.focusInputs.bind(this);
+    this.addClasses = this.addClasses.bind(this);
   }
 
-  addClasses = (bemSelector, name) => {
+  addClasses(bemSelector, name) {
     let classes = bemSelector;
     let isActive = this.state.isActive === name;
     let isFilled = this.state.inputs[name] !== "";
@@ -29,9 +30,9 @@ class ContacInfo extends Component {
     }
 
     return classes;
-  };
+  }
 
-  enableSubmit = (obj) => {
+  enableSubmit(obj) {
     const keys = Object.keys(obj);
     for (const key in keys) {
       if (obj[keys[key]] === "") {
@@ -40,17 +41,17 @@ class ContacInfo extends Component {
     }
 
     return true;
-  };
+  }
 
-  clickInputs = (clickEvent) => {
+  clickInputs(clickEvent) {
     this.setState({ isActive: clickEvent.target.name });
-  };
+  }
 
-  focusInputs = (focusEvent) => {
+  focusInputs(focusEvent) {
     this.setState({ isActive: focusEvent.target.name });
-  };
+  }
 
-  handleChange = (changeEvent) => {
+  handleChange(changeEvent) {
     const value = changeEvent.target.value;
     const name = changeEvent.target.name;
     const newInputs = { ...this.state.inputs };
@@ -59,13 +60,14 @@ class ContacInfo extends Component {
     const enable = this.enableSubmit(newInputs);
 
     this.setState({ inputs: newInputs, enableSubmit: enable });
-  };
+  }
 
-  clickSubmit = (clickEvent) => {
+  clickSubmit(clickEvent) {
     const { inputs } = this.state;
     this.props.setContactInfo(inputs);
-    console.log(inputs);
-  };
+    this.props.toggleBlocks(null);
+    this.props.toggleModal("submit");
+  }
 
   render() {
     return (

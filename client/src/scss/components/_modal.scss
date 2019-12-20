@@ -7,7 +7,7 @@
   right: 0;
   height: 100%;
   width: 100vw;
-  background-color: rgba(0, 0, 0, 0.205);
+  background-color: rgba(0, 0, 0, 0.329);
   @at-root #{&}__content {
     position: relative;
     background-color: white;
@@ -15,6 +15,11 @@
     top: 10%;
     width: 500px;
     margin: 0 auto;
+    border-radius: 2px;
+
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 45px,
+      rgba(0, 0, 0, 0.22) 0px 10px 18px;
+    transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
   }
 
   @at-root #{&}__display {
@@ -33,9 +38,41 @@
     }
   }
 
+  @at-root #{&}__info {
+    height: 300px;
+    width: 100%;
+
+    display: flex;
+    flex-flow: column nowrap;
+
+    @at-root #{&}__title {
+      margin: 10px 0 30px 0;
+    }
+    @at-root #{&}__elements-container {
+      flex-grow: 10;
+      box-sizing: border-box;
+
+      padding: 20px 20px 0 20px;
+    }
+
+    @at-root #{&}__element {
+      margin: 20px 0;
+    }
+
+    @at-root #{&}__text {
+      color: darken($details, 20%);
+    }
+
+    @at-root #{&}__dinamic-text {
+      margin-left: 10px;
+      color: $primary-color;
+    }
+  }
+
   @at-root #{&}__controls {
     display: flex;
     flex-flow: row nowrap;
+
     justify-content: flex-end;
     @at-root #{&}__button {
       box-sizing: border-box;

@@ -1,13 +1,20 @@
 .display {
-  width: 500px;
+  width: 100%;
+  box-sizing: border-box;
 
   margin: 0 auto;
-  padding: 30px 60px;
+
   font-size: 24px;
 
   @at-root #{&}__para {
     margin: 0.75em;
     text-align: center;
+  }
+
+  @at-root #{&}__info-container {
+    @at-root #{&}--hidden {
+      display: none;
+    }
   }
 
   @at-root #{&}__info {

@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-
-import Display from './Display';
-import Form from './Form';
-import '../css/app.css';
-import { replaceArrayElement } from '../utils.js';
+import React, { Component } from "react";
+import Navbar from "./Navbar";
+import Display from "./Display";
+import Form from "./Form";
+import "../css/app.css";
+import { replaceArrayElement } from "../utils.js";
 
 class App extends Component {
   constructor() {
     super();
 
     this.state = {
-      currentInfo: ['Martes 19 de Septiembre', '19:00', 'Gaston Casini'],
+      currentInfo: ["", ""]
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -24,7 +24,8 @@ class App extends Component {
 
   render() {
     return (
-      <div className='App'>
+      <div className="App">
+        <Navbar />
         <Display info={this.state.currentInfo} />
 
         <Form handleClick={this.handleClick} />
