@@ -1,28 +1,28 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 export class FormBlock extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      active: false,
+      active: false
     };
   }
 
   render() {
     const open = this.props.toggle === this.props.number ? true : false;
     return (
-      <div className={`form__block ${open ? 'form__block--open' : ''}`}>
+      <div className={`form__block ${open ? "form__block--open" : ""}`}>
         <button
-          className='form__block__button'
-          type={'button'}
+          className="form__block__button"
+          type={"button"}
           onClick={() => {
             this.props.onClick(this.props.number);
           }}
         >
           <span
             className={`form__block__number${
-              open ? ' form__block__number--active' : ''
+              open ? " form__block__number--active" : ""
             }`}
           >
             {this.props.number}
@@ -30,8 +30,16 @@ export class FormBlock extends Component {
 
           {this.props.info}
         </button>
-        <div className='form__block__element'>
-          {open && this.props.children}
+        <div
+          className={`${
+            this.props.rel
+              ? "form__block__container form__block__container--rel"
+              : "form__block__container"
+          }`}
+        >
+          <div className="form__block__element">
+            {open && this.props.children}
+          </div>
         </div>
       </div>
     );

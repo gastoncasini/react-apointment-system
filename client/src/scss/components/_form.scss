@@ -19,6 +19,13 @@
     height: 64px;
     box-sizing: border-box;
 
+    @at-root #{&}__container {
+      padding: 0 0 15px 80px;
+      @at-root #{&}--rel {
+        position: relative;
+      }
+    }
+
     @at-root #{&}__number {
       display: inline-flex;
       justify-content: center;
@@ -61,29 +68,14 @@
       margin: 30px 0 0 0;
     }
 
-    @at-root #{&}__submit-btn {
-      display: block;
-      margin: 15px auto;
-      padding: 12px;
-      width: 87%;
-      background-color: #dfdfdf;
-      box-sizing: border-box;
-
-      @at-root #{&}:enabled {
-        cursor: pointer;
-        background-color: $primary-color;
-      }
-    }
-
     // form html tags
     @at-root #{&}__element {
-      margin: 0 0 15px 80px;
       width: 100%;
-      max-width: 256px;
     }
 
     @at-root #{&}__input {
       width: 100%;
+      max-width: 256px;
       font-size: 18px;
       border-bottom: 1px solid $details;
       cursor: pointer;
@@ -125,6 +117,7 @@
 
     @at-root #{&}__select {
       border-bottom: 1px solid $details;
+      width: 256px;
     }
   }
 
@@ -160,7 +153,7 @@
     border: 2px solid $details;
 
     @at-root #{&}::after {
-      content: '';
+      content: "";
       position: absolute;
       top: 2.5px;
       left: 2.5px;
@@ -180,6 +173,26 @@
 }
 
 .contact-info {
+  display: flex;
+  width: 100%;
+
+  @at-root #{&}__submit-btn {
+    position: relative;
+
+    bottom: 0;
+    left: -40px;
+    display: block;
+
+    padding: 12px;
+    width: 100%;
+    background-color: #dfdfdf;
+    box-sizing: border-box;
+
+    @at-root #{&}:enabled {
+      cursor: pointer;
+      background-color: $primary-color;
+    }
+  }
   @at-root #{&}__element {
     position: relative;
     margin: 15px 0;

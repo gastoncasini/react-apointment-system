@@ -1,14 +1,16 @@
-import React from 'react';
+import React from "react";
 
 export default function SubmitButton(props) {
-  const innertext = props.isEnabled ? 'Submit' : 'Completa todos los campos ';
-  const isOpen = props.toggle === props.number ? '' : 'form__block--hidden';
+  const innertext = props.isEnabled ? "Submit" : "Completa todos los campos ";
 
   return (
-    <div className={`form__block ${isOpen}`}>
-      <button disabled={!props.isEnabled} className={`form__block__submit-btn`}>
-        <span className={'form__block__submit-btn__text'}>{innertext}</span>
-      </button>
-    </div>
+    <button
+      type={"button"}
+      disabled={!props.isEnabled}
+      className={`contact-info__submit-btn`}
+      onClick={props.onClick}
+    >
+      <span className={"contact-info__submit-btn__text"}>{innertext}</span>
+    </button>
   );
 }

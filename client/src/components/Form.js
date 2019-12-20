@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import FormBlock from './FormBlock';
-import TimePicker from './TimePicker';
-import ContatInfo from './ContacInfo';
-import SubmitButton from './SubmitButton';
-import Modal from './Modal';
-import { formatDay } from '../utils.js';
+import React, { Component } from "react";
+import FormBlock from "./FormBlock";
+import TimePicker from "./TimePicker";
+import ContatInfo from "./ContacInfo";
+
+import CalendarModal from "./CalendarModal";
+import { formatDay } from "../utils.js";
 
 class Form extends Component {
   constructor(props) {
@@ -12,73 +12,103 @@ class Form extends Component {
 
     this.state = {
       open: 1,
-      isModalOpen: false,
-      inputValue: '',
-      enableSubmit: false,
+      calendar: false,
+      submit: false,
+      inputValue: "",
+      submitInfo: {
+        date: null,
+        time: null,
+
+        contactInfo: {
+          nombre: null,
+          apellido: null,
+          telefono: null,
+          email: null
+        }
+      }
     };
 
     this.toggleBlocks = this.toggleBlocks.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.setDate = this.setDate.bind(this);
     this.setTime = this.setTime.bind(this);
-    this.inputValidator = this.inputValidator.bind(this);
+    this.setContactInfo = this.setContactInfo.bind(this);
+    this.addSubmitInfo = this.addSubmitInfo.bind(this);
   }
 
-  inputValidator(isValidated) {
-    this.setState({ enableSubmit: isValidated });
+  addSubmitInfo(name, info) {
+    const currentInfo = this.state.submitInfo;
+    let newInfo = { ...currentInfo, [name]: info };
+
+    this.setState({ submitInfo: newInfo });
   }
+  1;
 
   toggleBlocks(value) {
     this.setState({ open: value });
   }
 
-  toggleModal() {
-    const change = !this.state.isModalOpen;
+  toggleModal(modal) {
+    const change = !this.state[modal];
     this.setState({
-      isModalOpen: change,
+      [modal]: change
     });
   }
 
   setDate(date) {
     const displayDate = {
       value: formatDay(date),
-      position: 0,
+      position: 0
     };
-    this.props.handleClick(displayDate);
+    const inputDate = formatDay(date, "input");
 
-    const inputDate = formatDay(date, 'input');
-    this.setState({ inputValue: inputDate });
+    this.props.handleClick(displayDate);
+    this.addSubmitInfo("date", date);
+    this.setState({
+      inputValue: inputDate
+    });
   }
 
   setTime(time) {
     const displayTime = {
       value: time,
-      position: 1,
+      position: 1
     };
+
+    this.addSubmitInfo("time", time);
     this.props.handleClick(displayTime);
   }
 
+  setContactInfo(info) {
+    this.addSubmitInfo("contactInfo", info);
+  }
+
   render() {
-    const { isModalOpen } = this.state;
+    const { calendar } = this.state;
     return (
       <React.Fragment>
-        <form className='form'>
+        <form className="form">
           <FormBlock
             onClick={this.toggleBlocks}
             toggle={this.state.open}
             number={1}
-            info={'Elegi un dia disponible para tu reserva'}
+            info={"Elegi un dia disponible para tu reserva"}
           >
             <input
-              placeholder='Seleciona un dia'
+              placeholder="Seleciona un dia"
               value={this.state.inputValue}
-              type='text'
-              className='form__block__input'
-              onClick={this.toggleModal}
+              type="text"
+              className="form__block__input"
+              onClick={() => {
+                this.toggleModal("calendar");
+              }}
             />
 
-            {isModalOpen && (
-              <Modal toggleModal={this.toggleModal} setDate={this.setDate} />
+            {calendar && (
+              <CalendarModal
+                toggleModal={this.toggleModal}
+                setDate={this.setDate}
+              />
             )}
           </FormBlock>
 
@@ -86,7 +116,7 @@ class Form extends Component {
             onClick={this.toggleBlocks}
             toggle={this.state.open}
             number={2}
-            info={'Elegi un horario disponible para tu reserva'}
+            info={"Elegi un horario disponible para tu reserva"}
           >
             <TimePicker setTime={this.setTime} />
           </FormBlock>
@@ -95,15 +125,11 @@ class Form extends Component {
             onClick={this.toggleBlocks}
             toggle={this.state.open}
             number={3}
-            info={'Por favor completa con tu infomacion de concacto'}
+            info={"Por favor completa con tu infomacion de concacto"}
+            rel={true}
           >
-            <ContatInfo inputValidation={this.inputValidator} />
+            <ContatInfo setContactInfo={this.setContactInfo} />
           </FormBlock>
-          <SubmitButton
-            isEnabled={this.state.enableSubmit}
-            toggle={this.state.open}
-            number={3}
-          />
         </form>
       </React.Fragment>
     );
