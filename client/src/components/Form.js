@@ -5,6 +5,7 @@ import ContatInfo from "./ContacInfo";
 
 import CalendarModal from "./CalendarModal";
 import { formatDay } from "../utils.js";
+import DatePicker from "./DatePicker";
 
 class Form extends Component {
   constructor(props) {
@@ -56,17 +57,7 @@ class Form extends Component {
   }
 
   setDate(date) {
-    const displayDate = {
-      value: formatDay(date),
-      position: 0
-    };
-    const inputDate = formatDay(date, "input");
-
-    this.props.handleClick(displayDate);
     this.addSubmitInfo("date", date);
-    this.setState({
-      inputValue: inputDate
-    });
   }
 
   setTime(time) {
@@ -94,22 +85,12 @@ class Form extends Component {
             number={1}
             info={"Elegi un dia disponible para tu reserva"}
           >
-            <input
-              placeholder="Seleciona un dia"
-              value={this.state.inputValue}
-              type="text"
-              className="form__block__input"
-              onClick={() => {
-                this.toggleModal("calendar");
-              }}
+            <DatePicker
+              handleClick={this.props.handleClick}
+              toggleModal={this.toggleModal}
+              setDate={this.setDate}
+              isShowing={calendar}
             />
-
-            {calendar && (
-              <CalendarModal
-                toggleModal={this.toggleModal}
-                setDate={this.setDate}
-              />
-            )}
           </FormBlock>
 
           <FormBlock
