@@ -16,7 +16,8 @@ class SubmitModal extends Component {
   }
 
   confirm() {
-    console.log(this.props.submitInfo);
+    console.log("submit");
+    this.props.submit();
 
     this.props.toggleModal("submit");
   }

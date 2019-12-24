@@ -5,11 +5,15 @@ import ContatInfo from "./ContacInfo";
 import DatePicker from "./DatePicker";
 import SubmitModal from "./SubmitModal";
 
+import axios from "axios";
+
 class Form extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      appointments: null,
+
       open: 1,
       calendar: false,
       submit: false,
@@ -33,6 +37,18 @@ class Form extends Component {
     this.setTime = this.setTime.bind(this);
     this.setContactInfo = this.setContactInfo.bind(this);
     this.addSubmitInfo = this.addSubmitInfo.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    axios
+      .get("http://localhost:5000/api/appointments")
+      .then((res) => {
+        this.setState({ appointments: res.data });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   addSubmitInfo(name, info) {
@@ -70,6 +86,18 @@ class Form extends Component {
 
   setContactInfo(info) {
     this.addSubmitInfo("contactInfo", info);
+  }
+
+  handleSubmit() {
+    const { submitInfo } = this.state;
+    axios
+      .post("http://localhost:5000/api/appointments", submitInfo, {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   }
 
   render() {
@@ -117,6 +145,7 @@ class Form extends Component {
             <SubmitModal
               submitInfo={submitInfo}
               toggleModal={this.toggleModal}
+              submit={this.handleSubmit}
             />
           )}
         </form>
