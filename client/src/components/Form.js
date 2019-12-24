@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import FormBlock from "./FormBlock";
 import TimePicker from "./TimePicker";
 import ContatInfo from "./ContacInfo";
@@ -17,6 +18,8 @@ class Form extends Component {
       open: 1,
       calendar: false,
       submit: false,
+
+      redirect: false,
 
       submitInfo: {
         date: null,
@@ -96,14 +99,18 @@ class Form extends Component {
           "Content-Type": "application/json"
         }
       })
-      .then((res) => console.log(res))
+      .then((res) => {
+        this.setState({ redirect: true });
+      })
       .catch((err) => console.log(err));
   }
 
   render() {
-    const { calendar, submit, submitInfo } = this.state;
-    return (
-      <React.Fragment>
+    const { calendar, submit, submitInfo, redirect } = this.state;
+    if (redirect) {
+      return <Redirect to={"/success"} />;
+    } else {
+      return (
         <form className="form">
           <FormBlock
             onClick={this.toggleBlocks}
@@ -149,8 +156,8 @@ class Form extends Component {
             />
           )}
         </form>
-      </React.Fragment>
-    );
+      );
+    }
   }
 }
 export default Form;

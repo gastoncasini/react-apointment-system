@@ -1,35 +1,26 @@
 import React, { Component } from "react";
-import Navbar from "./Navbar";
-import Display from "./Display";
-import Form from "./Form";
-import "../css/app.css";
-import { replaceArrayElement } from "../utils.js";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
+import MainPage from "./MainPage";
+import SuccessPage from "./SuccessPage";
 
 class App extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      currentInfo: ["", ""]
-    };
-
-    this.handleClick = this.handleClick.bind(this);
+  constructor(props) {
+    super(props);
+    this.state = {};
   }
-
-  handleClick(obj) {
-    const currentState = this.state.currentInfo;
-    const updated = replaceArrayElement(currentState, obj);
-    this.setState({ currentInfo: updated });
-  }
-
   render() {
     return (
-      <div className="App">
-        <Navbar />
-        <Display info={this.state.currentInfo} />
-
-        <Form handleClick={this.handleClick} />
-      </div>
+      <Router>
+        <Switch>
+          <Route exact path={"/"}>
+            <MainPage />
+          </Route>
+          <Route exact path={"/success"}>
+            <SuccessPage />
+          </Route>
+        </Switch>
+      </Router>
     );
   }
 }

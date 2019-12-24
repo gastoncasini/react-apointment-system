@@ -1,15 +1,17 @@
-@import './partials/normalize';
-@import './partials/variables';
+@import "./partials/normalize";
+@import "./partials/variables";
 
 html,
 body {
   font-family: sans-serif;
 }
 
-@import './components/navbar';
-@import './components/slider';
-@import './components/table';
+@import "./components/navbar";
+@import "./components/slider";
+@import "./components/table";
 
-@import './components/display';
-@import './components/form';
-@import './components/modal';
+@import "./components/display";
+@import "./components/form";
+@import "./components/modal";
+
+@import "./components/success-page";
