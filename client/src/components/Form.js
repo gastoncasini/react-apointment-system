@@ -145,7 +145,10 @@ class Form extends Component {
             <SubmitModal
               submitInfo={submitInfo}
               toggleModal={this.toggleModal}
+<<<<<<< HEAD
               submit={this.handleSubmit}
+=======
+>>>>>>> 22cfd4a60421a4ffd64ac593163bcb0446ff4ff6
             />
           )}
         </form>
