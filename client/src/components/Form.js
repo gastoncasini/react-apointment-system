@@ -100,6 +100,7 @@ class Form extends Component {
         }
       })
       .then((res) => {
+        console.log("submitted");
         this.setState({ redirect: true });
       })
       .catch((err) => console.log(err));

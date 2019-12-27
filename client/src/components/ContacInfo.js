@@ -37,7 +37,7 @@ class ContacInfo extends Component {
     if (isFilled) {
       classes += ` ${bemSelector}--filled`;
     }
-    if (!isValid) {
+    if (!isValid && isValid !== null) {
       classes += ` ${bemSelector}--invalid`;
     }
 
@@ -48,7 +48,8 @@ class ContacInfo extends Component {
     let classes = [
       "contact-info__label",
       "contact-info__input__placeholder",
-      "contact-info__input__border"
+      "contact-info__input__border",
+      "contact-info__input__invalid-txt"
     ].map((inputClass) => {
       return this.addClasses(inputClass, name);
     });
@@ -90,7 +91,14 @@ class ContacInfo extends Component {
 
   clickSubmit(clickEvent) {
     const { inputs } = this.state;
-    this.props.setContactInfo(inputs);
+    let contactInfo = {
+      nombre: inputs.nombre.value,
+      apellido: inputs.apellido.value,
+      email: inputs.email.value,
+      telefono: inputs.telefono.value
+    };
+    console.log(contactInfo);
+    this.props.setContactInfo(contactInfo);
     this.props.toggleBlocks(null);
     this.props.toggleModal("submit");
   }
@@ -99,20 +107,20 @@ class ContacInfo extends Component {
     const inputs = [
       {
         name: "nombre",
-        placeholder: "Nombre",
+        placeholder: "tu nombre",
         invalidTxt: "no se pueden usar caracteres especiales",
         classes: this.setClasses("nombre")
       },
       {
         name: "apellido",
-        placeholder: "Apellido",
+        placeholder: "tu apellido",
         invalidTxt: "no se pueden usar caracteres especiales",
         classes: this.setClasses("apellido")
       },
       {
         name: "email",
         placeholder: "ejemplo@mail.com",
-        invalidTxt: "mail invalido",
+        invalidTxt: "email invalido",
         classes: this.setClasses("email")
       },
       {
@@ -142,7 +150,7 @@ class ContacInfo extends Component {
               name={name}
             />
             <hr className={classes[2]} />
-            <span className="contact-info__invalid-txt">{invalidTxt}</span>
+            <span className={classes[3]}>{invalidTxt}</span>
           </div>
         );
       }

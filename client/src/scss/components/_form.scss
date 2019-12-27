@@ -247,8 +247,24 @@
       font-size: 18px;
       position: absolute;
       bottom: 25px;
+      display: none;
+      @at-root #{&}--active {
+        display: block;
+      }
+
       @at-root #{&}--filled {
         display: none;
+      }
+    }
+
+    @at-root #{&}__invalid-txt {
+      position: absolute;
+      bottom: 0;
+      color: red;
+      font-size: 12px;
+      display: none;
+      @at-root #{&}--invalid {
+        display: block;
       }
     }
   }
