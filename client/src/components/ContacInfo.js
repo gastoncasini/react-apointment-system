@@ -1,12 +1,18 @@
 import React, { Component } from "react";
 import SubmitButton from "./SubmitButton";
+import { validateInput } from "../utils";
 
 class ContacInfo extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      inputs: { nombre: "", apellido: "", telefono: "", email: "" },
+      inputs: {
+        nombre: { value: "", isValid: null },
+        apellido: { value: "", isValid: null },
+        telefono: { value: "", isValid: null },
+        email: { value: "", isValid: null }
+      },
       isActive: "",
       enableSubmit: false
     };
@@ -16,18 +22,36 @@ class ContacInfo extends Component {
     this.clickInputs = this.clickInputs.bind(this);
     this.focusInputs = this.focusInputs.bind(this);
     this.addClasses = this.addClasses.bind(this);
+    this.renderInputs = this.renderInputs.bind(this);
   }
 
   addClasses(bemSelector, name) {
     let classes = bemSelector;
     let isActive = this.state.isActive === name;
-    let isFilled = this.state.inputs[name] !== "";
+    let isFilled = this.state.inputs[name].value !== "";
+    let isValid = this.state.inputs[name].isValid;
+
     if (isActive) {
       classes += ` ${bemSelector}--active`;
     }
     if (isFilled) {
       classes += ` ${bemSelector}--filled`;
     }
+    if (!isValid) {
+      classes += ` ${bemSelector}--invalid`;
+    }
+
+    return classes;
+  }
+
+  setClasses(name) {
+    let classes = [
+      "contact-info__label",
+      "contact-info__input__placeholder",
+      "contact-info__input__border"
+    ].map((inputClass) => {
+      return this.addClasses(inputClass, name);
+    });
 
     return classes;
   }
@@ -35,7 +59,7 @@ class ContacInfo extends Component {
   enableSubmit(obj) {
     const keys = Object.keys(obj);
     for (const key in keys) {
-      if (obj[keys[key]] === "") {
+      if (!obj[keys[key]].isValid) {
         return false;
       }
     }
@@ -52,10 +76,12 @@ class ContacInfo extends Component {
   }
 
   handleChange(changeEvent) {
-    const value = changeEvent.target.value;
     const name = changeEvent.target.name;
+    const value = changeEvent.target.value;
     const newInputs = { ...this.state.inputs };
-    newInputs[name] = value;
+
+    newInputs[name].value = value;
+    newInputs[name].isValid = validateInput(value, name);
 
     const enable = this.enableSubmit(newInputs);
 
@@ -69,40 +95,71 @@ class ContacInfo extends Component {
     this.props.toggleModal("submit");
   }
 
+  renderInputs() {
+    const inputs = [
+      {
+        name: "nombre",
+        placeholder: "Nombre",
+        invalidTxt: "no se pueden usar caracteres especiales",
+        classes: this.setClasses("nombre")
+      },
+      {
+        name: "apellido",
+        placeholder: "Apellido",
+        invalidTxt: "no se pueden usar caracteres especiales",
+        classes: this.setClasses("apellido")
+      },
+      {
+        name: "email",
+        placeholder: "ejemplo@mail.com",
+        invalidTxt: "mail invalido",
+        classes: this.setClasses("email")
+      },
+      {
+        name: "telefono",
+        placeholder: "0000-0000",
+        invalidTxt: "telefono invalido",
+        classes: this.setClasses("telefono")
+      }
+    ];
+
+    const elements = inputs.map(
+      ({ name, placeholder, classes, invalidTxt }, index) => {
+        const value = this.state.inputs[name].value;
+
+        return (
+          <div className="contact-info__element" key={index}>
+            <label className={classes[0]}>{name}</label>
+            <div className={classes[1]}>{placeholder}</div>
+            <input
+              autoComplete="off"
+              type="text"
+              onClick={this.clickInputs}
+              onChange={this.handleChange}
+              onFocus={this.focusInputs}
+              value={value}
+              className={"contact-info__input"}
+              name={name}
+            />
+            <hr className={classes[2]} />
+            <span className="contact-info__invalid-txt">{invalidTxt}</span>
+          </div>
+        );
+      }
+    );
+
+    return elements;
+  }
+
   render() {
+    const inputs = this.renderInputs();
     return (
       <React.Fragment>
         <fieldset className={"contact-info"}>
           <legend>Completa tu infomacion de contacto</legend>
-          {["nombre", "apellido", "email", "telefono"].map((name, index) => {
-            const value = this.state[name];
-            const classes = [
-              "contact-info__label",
-              "contact-info__input__placeholder",
-              "contact-info__input__border"
-            ].map((bem) => {
-              return this.addClasses(bem, name);
-            });
-
-            return (
-              <div className="contact-info__element" key={index}>
-                <label className={classes[0]}>{name}</label>
-                <div className={classes[1]}>{name}</div>
-                <input
-                  autoComplete="off"
-                  type="text"
-                  onClick={this.clickInputs}
-                  onChange={this.handleChange}
-                  onFocus={this.focusInputs}
-                  value={value}
-                  className={"contact-info__input"}
-                  name={name}
-                />
-                <hr className={classes[2]} />
-              </div>
-            );
+          {inputs.map((input) => {
+            return input;
           })}
-
           <SubmitButton
             isEnabled={this.state.enableSubmit}
             setContactInfo={this.setContactInfo}
