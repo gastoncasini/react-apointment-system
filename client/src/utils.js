@@ -7,75 +7,75 @@ export const formatDay = (DateObj, format) => {
   const month = DateObj.getMonth() + 1;
   const year = stringDate.slice(11, 15);
 
-  if (format === 'array') {
+  if (format === "array") {
     return [year, weekday, writtenMonth, day];
   }
-  if (format === 'input') {
+  if (format === "input") {
     return `${day}/${month}/${year}`;
   }
 
   switch (weekday) {
-    case 'Mon':
-      weekday = 'Lunes';
+    case "Mon":
+      weekday = "Lunes";
       break;
-    case 'Tue':
-      weekday = 'Martes';
+    case "Tue":
+      weekday = "Martes";
       break;
-    case 'Wed':
-      weekday = 'Miercoles';
+    case "Wed":
+      weekday = "Miercoles";
       break;
-    case 'Thu':
-      weekday = 'Jueves';
+    case "Thu":
+      weekday = "Jueves";
       break;
-    case 'Fri':
-      weekday = 'Viernes';
+    case "Fri":
+      weekday = "Viernes";
       break;
-    case 'Sat':
-      weekday = 'Sabado';
+    case "Sat":
+      weekday = "Sabado";
       break;
-    case 'Sun':
-      weekday = 'Domingo';
+    case "Sun":
+      weekday = "Domingo";
       break;
     default:
       break;
   }
 
   switch (writtenMonth) {
-    case 'Jan':
-      writtenMonth = 'Enero';
+    case "Jan":
+      writtenMonth = "Enero";
       break;
-    case 'Feb':
-      writtenMonth = 'Febrero';
+    case "Feb":
+      writtenMonth = "Febrero";
       break;
-    case 'Mar':
-      writtenMonth = 'Marzo';
+    case "Mar":
+      writtenMonth = "Marzo";
       break;
-    case 'Apr':
-      writtenMonth = 'Abril';
+    case "Apr":
+      writtenMonth = "Abril";
       break;
-    case 'May':
-      writtenMonth = 'Mayo';
+    case "May":
+      writtenMonth = "Mayo";
       break;
-    case 'Jun':
-      writtenMonth = 'Junio';
+    case "Jun":
+      writtenMonth = "Junio";
       break;
-    case 'Jul':
-      writtenMonth = 'Julio';
+    case "Jul":
+      writtenMonth = "Julio";
       break;
-    case 'Aug':
-      writtenMonth = 'Agosto';
+    case "Aug":
+      writtenMonth = "Agosto";
       break;
-    case 'Sep':
-      writtenMonth = 'Septiembre';
+    case "Sep":
+      writtenMonth = "Septiembre";
       break;
-    case 'Oct':
-      writtenMonth = 'Octubre';
+    case "Oct":
+      writtenMonth = "Octubre";
       break;
-    case 'Nov':
-      writtenMonth = 'Noviembre';
+    case "Nov":
+      writtenMonth = "Noviembre";
       break;
-    case 'Dec':
-      writtenMonth = 'Diciembre';
+    case "Dec":
+      writtenMonth = "Diciembre";
       break;
     default:
       break;
@@ -103,4 +103,27 @@ export const fillSchedule = (start, end) => {
     schedule.push(current);
   }
   return schedule;
+};
+
+export const validateInput = (inputValue, inputType) => {
+  let regex;
+  if (inputType === "email") {
+    regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  } else if (inputType === "telefono") {
+    regex = /^(\d{8,10})/;
+  } else {
+    regex = /[a-zA-Z]+/;
+  }
+
+  return regex.test(inputValue);
+};
+
+export const validateEmail = (email) => {
+  const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return emailRegex.test(email);
+};
+
+export const validatePhone = (phone) => {
+  const phoneRegex = /\d{8}(\d{2})?/;
+  return phoneRegex.test(phone);
 };
