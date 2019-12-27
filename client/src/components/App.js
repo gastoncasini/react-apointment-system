@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import MainPage from "./MainPage";
 import SuccessPage from "./SuccessPage";
+import NotFound from "./NotFound";
 
 class App extends Component {
   constructor(props) {
@@ -18,6 +19,10 @@ class App extends Component {
           </Route>
           <Route exact path={"/success"}>
             <SuccessPage />
+          </Route>
+
+          <Route>
+            <NotFound />
           </Route>
         </Switch>
       </Router>
